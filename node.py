@@ -8,6 +8,7 @@ import requests
 requests.packages.urllib3.disable_warnings()
 import json
 import math
+import sys_constant as sc
 
 # Source: http://www.johndcook.com/blog/python_longitude_latitude/
 def distance_on_unit_sphere(lat1, long1, lat2, long2):
@@ -53,8 +54,9 @@ routers = [
 
 url = "https://10.10.2.25:8443/oauth2/token"
 
-payload = {'grant_type': 'password', 'username': 'some_name', 'some_password': 'northstar123'}
-response = requests.post (url, data=payload, auth=('some_name','some_password'), verify=False)
+payload = {'grant_type': 'password', 'username': sc.MY_USERNAME, 'password': sc.MY_PWD}
+response = requests.post(url, data=payload, auth=(sc.MY_USERNAME,sc.MY_PWD), verify=False)
+print response
 json_data = json.loads(response.text)
 authHeader= {"Authorization":"{token_type} {access_token}".format(**json_data)}
 

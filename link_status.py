@@ -6,68 +6,15 @@ Created on Feb 21, 2016
 import requests
 requests.packages.urllib3.disable_warnings()
 import json
+import pprint
+import sys_constant as sc
 
-routers = [ 
-           { 'name': 'chicago', 'router_id': '10.210.10.124', 'interfaces': [
-                                                                            { 'name': 'ge-1/0/1', 'address': '10.210.16.2' }, 
-                                                                            { 'name': 'ge-1/0/2', 'address': '10.210.13.2' },
-                                                                            { 'name': 'ge-1/0/3', 'address': '10.210.14.2' }, 
-                                                                            { 'name': 'ge-1/0/4', 'address': '10.210.17.2' }
-                                                                            ] 
-            },
-           { 'name': 'san francisco', 'router_id': '10.210.10.100', 'interfaces': [
-                                                                            { 'name': 'ge-1/0/0', 'address': '10.210.18.1' },
-                                                                            { 'name': 'ge-1/0/1', 'address': '10.210.15.1' },
-                                                                            { 'name': 'ge-1/0/3', 'address': '10.210.16.1' }
-                                                                            ]
-            },
-           { 'name': 'dallas', 'router_id': '10.210.10.106', 'interfaces': [
-                                                                             { 'name': 'ge-1/0/0', 'address': '10.210.15.2' }, 
-                                                                             { 'name': 'ge-1/0/1', 'address': '10.210.19.1' }, 
-                                                                             { 'name': 'ge-1/0/2', 'address': '10.210.21.1' }, 
-                                                                             { 'name': 'ge-1/0/3', 'address': '10.210.11.1' }, 
-                                                                             { 'name': 'ge-1/0/4', 'address': '10.210.13.1' }
-                                                                             ] 
-            },
-           { 'name': 'miami', 'router_id': '10.210.10.112', 'interfaces': [
-                                                                            { 'name': 'ge-1/0/0', 'address': '10.210.22.1' }, 
-                                                                            { 'name': 'ge-1/0/1', 'address': '10.210.24.1' }, 
-                                                                            { 'name': 'ge-1/0/2', 'address': '10.210.12.1' }, 
-                                                                            { 'name': 'ge-1/0/3', 'address': '10.210.11.2' }, 
-                                                                            { 'name': 'ge-1/0/4', 'address': '10.210.14.1' }
-                                                                            ] 
-            },
-           { 'name': 'new york', 'router_id': '10.210.10.118', 'interfaces': [
-                                                                               { 'name': 'ge-1/0/3', 'address': '10.210.12.2' }, 
-                                                                               { 'name': 'ge-1/0/5', 'address': '10.210.17.1' }, 
-                                                                               { 'name': 'ge-1/0/7', 'address': '10.210.26.1' }
-                                                                               ] 
-            },
-           { 'name': 'los angeles', 'router_id': '10.210.10.113', 'interfaces': [
-                                                                                  { 'name': 'ge-1/0/0', 'address': '10.210.18.2' },
-                                                                                  { 'name': 'ge-1/0/1', 'address': '10.210.19.2' },
-                                                                                  { 'name': 'ge-1/0/2', 'address': '10.210.20.1' }
-                                                                                  ]
-            },
-           { 'name': 'houston', 'router_id': '10.210.10.114', 'interfaces': [
-                                                                              { 'name': 'ge-1/0/0', 'address': '10.210.20.2' },
-                                                                              { 'name': 'ge-1/0/1', 'address': '10.210.21.2' },
-                                                                              { 'name': 'ge-1/0/2', 'address': '10.210.22.2' },
-                                                                              { 'name': 'ge-1/0/3', 'address': '10.210.25.1' }
-                                                                              ] 
-            },
-           { 'name': 'tampa', 'router_id': '10.210.10.115', 'interfaces': [
-                                                                            { 'name': 'ge-1/0/0', 'address': '10.210.25.2' }, 
-                                                                            { 'name': 'ge-1/0/1', 'address': '10.210.24.2' }, 
-                                                                            { 'name': 'ge-1/0/2', 'address': '10.210.26.2' }
-                                                                            ]
-            }
-           ]
+routers = sc.routers
 
 url = "https://10.10.2.25:8443/oauth2/token"
 
-payload = {'grant_type': 'password', 'username': 'some_name', 'password': 'some_password'}
-response = requests.post (url, data=payload, auth=('some_name','some_password'), verify=False)
+payload = {'grant_type': 'password', 'username': sc.MY_USERNAME, 'password': sc.MY_PWD}
+response = requests.post (url, data=payload, auth=(sc.MY_USERNAME,sc.MY_PWD), verify=False)
 json_data = json.loads(response.text)
 authHeader= {"Authorization":"{token_type} {access_token}".format(**json_data)}
 
@@ -86,6 +33,7 @@ for link in links:
     if link['operationalStatus'] == 'Up':
         continue
     flag = True
+    pprint.pprint(link)
     for r in routers:
         if r['router_id'] == link['endA']['node']['name']:
             aNodeName = r['name']
