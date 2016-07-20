@@ -52,7 +52,7 @@ routers = [
            { 'name': 'tampa', 'router_id': '10.210.10.115', 'latitude':'', 'longitude':''}
            ]
 
-url = "https://10.10.2.25:8443/oauth2/token"
+url = "https://10.10.2.29:8443/oauth2/token"
 
 payload = {'grant_type': 'password', 'username': sc.MY_USERNAME, 'password': sc.MY_PWD}
 response = requests.post(url, data=payload, auth=(sc.MY_USERNAME,sc.MY_PWD), verify=False)
@@ -60,7 +60,7 @@ print response
 json_data = json.loads(response.text)
 authHeader= {"Authorization":"{token_type} {access_token}".format(**json_data)}
 
-r = requests.get('https://10.10.2.25:8443/NorthStar/API/v1/tenant/1/topology/1/nodes/', headers=authHeader, verify=False)
+r = requests.get('https://10.10.2.29:8443/NorthStar/API/v1/tenant/1/topology/1/nodes/', headers=authHeader, verify=False)
 
 p = json.dumps(r.json())
 nodes = json.loads(p)
