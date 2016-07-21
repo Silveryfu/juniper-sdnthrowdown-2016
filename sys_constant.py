@@ -1,6 +1,12 @@
 MY_USERNAME = 'group1'
 MY_PWD = 'Group1'
 
+default_ero = [
+                { 'topoObjectType': 'ipv4', 'address': '10.210.15.2'},
+                { 'topoObjectType': 'ipv4', 'address': '10.210.13.2'},
+                { 'topoObjectType': 'ipv4', 'address': '10.210.17.1'}
+               ]
+
 routers = [
            { 'name': 'chicago', 'router_id': '10.210.10.124', 'interfaces': [
                                                                             { 'name': 'ge-1/0/1', 'address': '10.210.16.2' },

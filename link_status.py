@@ -30,10 +30,10 @@ zNodeName = ''
 aLinkName = ''
 zLinkName = ''
 for link in links:
+    pprint.pprint(link)
     if link['operationalStatus'] == 'Up':
         continue
     flag = True
-    pprint.pprint(link)
     for r in routers:
         if r['router_id'] == link['endA']['node']['name']:
             aNodeName = r['name']
@@ -44,8 +44,8 @@ for link in links:
             zNodeName = r['name']
             for i in r['interfaces']:
                 if i['address'] == link['endZ']['ipv4Address']['address']:
-                    zLinkName = i['name']                    
-                     
+                    zLinkName = i['name']
+
 if flag == True:
     print 'Link failure:'
     print '\tA: ', aNodeName, aLinkName
