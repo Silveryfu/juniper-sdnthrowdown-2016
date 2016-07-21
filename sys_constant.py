@@ -1,5 +1,6 @@
 MY_USERNAME = 'group1'
 MY_PWD = 'Group1'
+api_version = 'v1'
 
 default_ero = [
                 { 'topoObjectType': 'ipv4', 'address': '10.210.15.2'},
