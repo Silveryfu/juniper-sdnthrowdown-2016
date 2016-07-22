@@ -1,6 +1,16 @@
 MY_USERNAME = 'group1'
 MY_PWD = 'Group1'
-api_version = 'v1'
+
+TOKEN_URI = "https://10.10.2.29:8443/oauth2/token"
+CONTROLLER_URI = 'https://10.10.2.29:8443/NorthStar/API/'
+CONTROLLER_DB_URI = '10.10.4.252'
+CONTROLLER_DB_PORT = 6379
+CONTROLLER_DB_NUM = 0
+API_VERSION = 'v1'
+TENANT_ID = '1'
+TOPO_ID = '1'
+
+TOPO_EP = CONTROLLER_URI + API_VERSION + '/tenant/' + TENANT_ID + '/topology/' + TOPO_ID + '/'
 
 default_ero = [
                 { 'topoObjectType': 'ipv4', 'address': '10.210.15.2'},
@@ -64,3 +74,5 @@ routers = [
                                                                             ]
             }
            ]
+
+

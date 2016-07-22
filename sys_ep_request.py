@@ -11,25 +11,17 @@ import sys_constant as sc
 
 class Ep_request:
     def __init__(self):
-        url = "https://10.10.2.29:8443/oauth2/token"
         payload = {'grant_type': 'password', 'username': sc.MY_USERNAME, 'password': sc.MY_PWD}
-        response = requests.post(url, data=payload, auth=(sc.MY_USERNAME, sc.MY_PWD), verify=False)
+        response = requests.post(sc.TOKEN_URI, data=payload, auth=(sc.MY_USERNAME, sc.MY_PWD), verify=False)
         json_data = json.loads(response.text)
         self.authHeader= {"Authorization":"{token_type} {access_token}".format(**json_data)}
 
-        self.ep_lsp = 'https://10.10.2.29:8443/NorthStar/API/'+sc.api_version+'/tenant/1/topology/1/te-lsps/'
-        self.ep_topo = 'https://10.10.2.29:8443/NorthStar/API'+sc.api_version+'tenant/1/topology/1'
-        self.ep_link = 'https://10.10.2.29:8443/NorthStar/API'+sc.api_version+'tenant/1/topology/1/links/'
-        self.ep_node = 'https://10.10.2.29:8443/NorthStar/API'+sc.api_version+'tenant/1/topology/1/nodes/'
+        self.ep_topo = sc.TOPO_EP
+        self.ep_link = sc.TOPO_EP + 'links/'
+        self.ep_node = sc.TOPO_EP + 'nodes/'
+        self.ep_lsp = sc.TOPO_EP + 'te-lsps/'
 
-    def ep_read(self, ep=None):
-        r = requests.get(ep, headers=self.authHeader, verify=False)
-        return json.loads(json.dumps(r.json()))
-
-    def ep_write(self, ep=None):
-        pass
-
-    def ep_update_lsp(self, lsp_name, ero=sc.default_ero):
+    def ep_update_lsp_ero(self, lsp_name, ero=sc.default_ero):
         lsp_list, lsp_new = self.ep_read(self.ep_lsp), None
 
         is_match=False
@@ -52,12 +44,37 @@ class Ep_request:
         return requests.put(self.ep_lsp + str(lsp_new['lspIndex']),
                                 json=lsp_new, headers=self.authHeader, verify=False)
 
+    def ep_read(self, ep):
+        r = requests.get(ep, headers=self.authHeader, verify=False)
+        return json.loads(json.dumps(r.json()))
+
+    def ep_read_lsp_by_id(self, id):
+        return self.ep_read(self.ep_lsp + id)
+
+    def ep_read_lsp_by_name(self, lsp_name):
+        id = self.ep_name_to_id(lsp_name)
+        if id is None:
+            return "--> Non-existent LSP or invalid name."
+        return self.ep_read(self.ep_lsp + id)
+
+    def ep_lsp_name_to_id(self, lsp_name):
+        lsp_list = self.ep_read(self.ep_lsp)
+        id = None
+        for lsp in lsp_list:
+            if lsp['name'] == lsp_name:
+                id = lsp['lspIndex']
+        return str(id)
+
+    def ep_get_link(self, node_1=None, node_2=None):
+        topo = self.ep_read(self.ep_topo)
+        pprint.pprint(topo)
+        pass
+
 if __name__ == "__main__":
     er = Ep_request()
-    response = er.ep_update_lsp('GROUP_ONE_SF_NY_LSP1')
-    if isinstance(response, str):
-        print response
-    else:
-        pprint.pprint(response.text)
+    er.ep_get_link()
+
+
+
 
 
