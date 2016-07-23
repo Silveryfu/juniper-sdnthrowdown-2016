@@ -6,6 +6,7 @@ Created on July 21, 2016
 import requests
 requests.packages.urllib3.disable_warnings()
 import sys_constant as sc
+from pprint import pprint
 import json
 
 class Ep_request:
@@ -19,6 +20,17 @@ class Ep_request:
         self.ep_link = sc.TOPO_EP + 'links/'
         self.ep_node = sc.TOPO_EP + 'nodes/'
         self.ep_lsp = sc.TOPO_EP + 'te-lsps/'
+
+    def ep_get_node_location(self, node_id):
+        p = json.dumps(self.ep_get_node())
+        nodes = json.loads(p)
+
+        for node in nodes:
+            if node['name'] == node_id:
+                print node['name'], ':'
+                print '\t latitude: ', node['topology']['coordinates']['coordinates'][0]
+                print '\t longitude: ', node['topology']['coordinates']['coordinates'][1]
+                break
 
     def ep_update_lsp_ero(self, lsp_name, ero=sc.default_ero):
         # End point call to update the ero given lsp name
@@ -74,10 +86,12 @@ class Ep_request:
     def ep_get_topo(self):
         return self.ep_read(self.ep_topo)
 
+    def ep_get_node(self):
+        return self.ep_read(self.ep_node)
+
 if __name__ == "__main__":
     er = Ep_request()
-    er.ep_get_topo()
-
+    er.ep_get_node_location('10.210.10.124')
 
 
 

@@ -97,7 +97,7 @@ if __name__ == "__main__":
     Lu = Lsp_update()
     #print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP1", ['miami', 'dallas'])
     #print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP1", ['dallas', 'miami'])
-    print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP4", ['chicago'])
+    print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP4", ['dallas', 'miami'])
     #print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP2", [ 'miami', 'dallas', 'los angeles'])
     #print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP3", [ 'miami', 'dallas', 'los angeles'])
     #print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP4", [ 'miami', 'dallas', 'los angeles'])
