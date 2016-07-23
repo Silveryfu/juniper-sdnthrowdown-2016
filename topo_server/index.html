@@ -54,16 +54,180 @@
         for (var router in routermap) {
           // Add the circle for this router to the map.
           var cityCircle = new google.maps.Circle({
-            strokeColor: '#FF0000',
+            strokeColor: '#16a085',
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: '#FF0000',
+            fillColor: '#16a085',
             fillOpacity: 0.35,
             map: map,
             center: routermap[router].center,
             radius: 100000
           });
         }
+
+        var link_ny_miami = new google.maps.Polyline({
+          path: [{lat: 40.714, lng: -74.005}, {lat: 25.78, lng: -80.21}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_ny_miami.setMap(map);
+
+        var link_sf_dallas = new google.maps.Polyline({
+          path: [{lat: 37.79, lng: -122.55}, {lat: 32.789997, lng: -96.77}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_sf_dallas.setMap(map);
+
+        var link_sf_chicago = new google.maps.Polyline({
+          path: [{lat: 37.79, lng: -122.55}, {lat: 41.878, lng: -87.629}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_sf_chicago.setMap(map);
+
+        var link_sf_la = new google.maps.Polyline({
+          path: [{lat: 37.79, lng: -122.55}, {lat: 34.052, lng: -118.243}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_sf_la.setMap(map);
+
+        var link_dallas_chicago = new google.maps.Polyline({
+          path: [{lat: 32.789997, lng: -96.77}, {lat: 41.878, lng: -87.629}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_dallas_chicago.setMap(map);
+
+
+        var link_miami_dallas = new google.maps.Polyline({
+          path: [{lat: 25.78, lng: -80.21}, {lat: 32.789997, lng: -96.77}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_miami_dallas.setMap(map);
+
+
+        var link_dallas_la = new google.maps.Polyline({
+          path: [{lat: 32.789997, lng: -96.77}, {lat: 34.052, lng: -118.243}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_dallas_la.setMap(map);
+
+        var link_dallas_houston = new google.maps.Polyline({
+          path: [{lat: 32.789997, lng: -96.77},  {lat: 29.770002, lng: -95.39}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_dallas_houston.setMap(map);
+
+        var link_miami_chicago = new google.maps.Polyline({
+          path: [{lat: 25.78, lng: -80.21}, {lat: 41.878, lng: -87.629}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_miami_chicago.setMap(map);
+
+        var link_miami_houston = new google.maps.Polyline({
+          path: [{lat: 25.78, lng: -80.21},  {lat: 29.770002, lng: -95.39}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_miami_houston.setMap(map);
+
+
+        var link_miami_tampa = new google.maps.Polyline({
+          path: [{lat: 25.78, lng: -80.21}, {lat: 27.960001, lng: -82.48}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_miami_tampa.setMap(map);
+
+        var link_la_houston = new google.maps.Polyline({
+          path: [{lat: 34.052, lng: -118.243},  {lat: 29.770002, lng: -95.39}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_la_houston.setMap(map);
+
+
+        var link_houston_tampa = new google.maps.Polyline({
+          path: [ {lat: 29.770002, lng: -95.39}, {lat: 27.960001, lng: -82.48}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_houston_tampa.setMap(map);
+
+
+        var link_tampa_ny = new google.maps.Polyline({
+          path: [{lat: 27.960001, lng: -82.48}, {lat: 40.714, lng: -74.005}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_tampa_ny.setMap(map);
+
+
+
+        var link_ny_chicago = new google.maps.Polyline({
+          path: [{lat: 40.714, lng: -74.005}, {lat: 41.878, lng: -87.629}],
+          geodesic: true,
+          strokeColor: '#3498db',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        link_ny_chicago.setMap(map);
+
+
+
+
+        
+
+
       }
     </script>
     <script async defer

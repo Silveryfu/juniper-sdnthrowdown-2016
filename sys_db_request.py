@@ -13,11 +13,13 @@ One method should return only one type of data.
 import sys_constant as sc
 import redis
 import json
+from influxdb import InfluxDBClient
 from pprint import pprint
 
 class Controller_db:
     def __init__(self, r):
         self.redis = r
+        self.influx = None
 
     @classmethod
     def from_new_redis(cls):
@@ -51,12 +53,33 @@ class Controller_db:
             rtt += self.get_link_rtt(node_list[i], node_list[i+1])[1]
         return timestamp, rtt, 'ms'
 
+    def init_influx_client(self):
+        host = sc.VM_EAST
+        port = sc.INFLUX_PORT
+        user = sc.INFLUX_USER
+        password = sc.INFLUX_PASSWORD
+        dbname = sc.INFLUX_NAME
+        self.influx = InfluxDBClient(host, port, user, password, dbname)
+
+        try:
+            self.influx.create_database(dbname)
+            print("--> Create database: " + dbname)
+        except:
+            print("==> Database " + dbname + " already exist.")
+
+    def write_to_influx(self, data_frame):
+        print("Write points: {0}".format(json_body))
+        client.write_points(json_body)
+        pass
+
+
 if __name__ == "__main__":
     cd = Controller_db.from_new_redis()
 
-    while True:
-        print '--> Path rtt : ', cd.get_path_rtt(['new york', 'miami', 'dallas', 'san francisco'])
-        print '--> Link rtt : ', cd.get_link_rtt('new york', 'miami')
-        print '--> Bandwidth: ', cd.get_if_bw('new york:ge-1/0/3')
+    cd.init_influx_client()
+    # while True:
+    #     print '--> Path rtt : ', cd.get_path_rtt(['new york', 'miami', 'dallas', 'san francisco'])
+    #     print '--> Link rtt : ', cd.get_link_rtt('new york', 'miami')
+    #     print '--> Bandwidth: ', cd.get_if_bw('new york:ge-1/0/3')
 
 
