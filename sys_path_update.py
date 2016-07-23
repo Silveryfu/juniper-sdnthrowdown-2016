@@ -50,8 +50,8 @@ class Lsp_update:
 
         #self.er = ep.Ep_request()
         link_list = self.er.ep_get_topo()["links"]
-        with open("topology.txt", "w") as f:
-            f.write(json.dumps(link_list, indent = 4))
+        # with open("topology.txt", "w") as f:
+        #     f.write(json.dumps(link_list, indent = 4))
 
         found = False
         for link in link_list:

@@ -30,10 +30,10 @@ class Link_event_handler(threading.Thread):
             print item['channel'], ":", item['data']
             if isinstance(item['data'], basestring):
                 event = json.loads(item['data'])
-                self.handler(event)
+                self.handle(event)
 
-    def handler(self, event):
-        print event
+    def handle(self, event):
+
         pass
 
 if __name__ == "__main__":
