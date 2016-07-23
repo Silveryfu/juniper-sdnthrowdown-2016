@@ -10,5 +10,5 @@ if __name__ == "__main__":
     else:
         pprint.pprint(response.text)
 
-    response = er.ep_read_lsp_by_name('GROUP_ONE_SF_NY_LSP3')
+    response = er.ep_get_lsp('GROUP_ONE_SF_NY_LSP3')
     pprint.pprint(response)

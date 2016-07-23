@@ -5,9 +5,8 @@ Created on July 21, 2016
 '''
 import requests
 requests.packages.urllib3.disable_warnings()
-import json
-import pprint
 import sys_constant as sc
+import json
 
 class Ep_request:
     def __init__(self):
@@ -22,6 +21,9 @@ class Ep_request:
         self.ep_lsp = sc.TOPO_EP + 'te-lsps/'
 
     def ep_update_lsp_ero(self, lsp_name, ero=sc.default_ero):
+        # End point call to update the ero given lsp name
+        # lsp_name: string
+        # ero: new ero, list
         lsp_list, lsp_new = self.ep_read(self.ep_lsp), None
 
         is_match=False
@@ -42,37 +44,39 @@ class Ep_request:
         }
 
         return requests.put(self.ep_lsp + str(lsp_new['lspIndex']),
-                                json=lsp_new, headers=self.authHeader, verify=False)
+                            json=lsp_new, headers=self.authHeader, verify=False)
 
     def ep_read(self, ep):
-        r = requests.get(ep, headers=self.authHeader, verify=False)
-        return json.loads(json.dumps(r.json()))
+        # End point call for the given end point uri
+        # ep: string
+        return json.loads(json.dumps(requests.get(ep, headers=self.authHeader, verify=False).json()))
 
-    def ep_read_lsp_by_id(self, id):
+    def ep_get_lsp_by_id(self, id):
         return self.ep_read(self.ep_lsp + id)
 
-    def ep_read_lsp_by_name(self, lsp_name):
+    def ep_get_lsp(self, lsp_name):
+        # End point call for lsp
+        # lsp_name: name of the target lsp, string
         id = self.ep_name_to_id(lsp_name)
         if id is None:
             return "--> Non-existent LSP or invalid name."
         return self.ep_read(self.ep_lsp + id)
 
     def ep_lsp_name_to_id(self, lsp_name):
-        lsp_list = self.ep_read(self.ep_lsp)
+        # End point call for mapping lsp name to index
+        # lsp_name: name of the target lsp, string
         id = None
-        for lsp in lsp_list:
+        for lsp in self.ep_read(self.ep_lsp):
             if lsp['name'] == lsp_name:
                 id = lsp['lspIndex']
         return str(id)
 
-    def ep_get_link(self, node_1=None, node_2=None):
-        topo = self.ep_read(self.ep_topo)
-        pprint.pprint(topo)
-        pass
+    def ep_get_topo(self):
+        return self.ep_read(self.ep_topo)
 
 if __name__ == "__main__":
     er = Ep_request()
-    er.ep_get_link()
+    er.ep_get_topo()
 
 
 
