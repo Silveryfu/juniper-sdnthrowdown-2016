@@ -389,16 +389,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_1.setMap(null);
@@ -411,16 +413,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
 
   });
 
@@ -434,16 +438,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_3.setMap(null);
@@ -456,16 +462,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_4.setMap(null);
@@ -478,16 +486,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_5.setMap(null);
@@ -500,16 +510,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_6.setMap(null);
@@ -522,16 +534,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_7.setMap(null);
@@ -544,16 +558,18 @@ function set_marker() {
     icons: [{
       icon: arrow_icon,
       offset: '100%',
-    }, {
-      icon: arrow_icon,
-      offset: '75%',
-    }, {
-      icon: arrow_icon,
-      offset: '50%',
-    }, {
-      icon: arrow_icon,
-      offset: '25%',
-    }]
+    }
+    // , {
+    //   icon: arrow_icon,
+    //   offset: '75%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '50%',
+    // }, {
+    //   icon: arrow_icon,
+    //   offset: '25%',
+    // }
+    ]
   });
 
   lsp_8.setMap(null);
