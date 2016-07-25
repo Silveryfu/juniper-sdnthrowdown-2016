@@ -8,299 +8,397 @@ var lsp_5_path, lsp_6_path, lsp_7_path, lsp_8_path;
 function initMap() {
   var mapDiv = document.getElementById('map');
   map = new google.maps.Map(mapDiv, {
-    center: {lat: 32.789997, lng: -96.77},
+    center: {lat: 30.789997, lng: -92.77},
+    // center: {lat: 32.789997, lng: -96.77},
     zoom: 5
   });
 
   set_topo();
-  set_marker();  
+  set_marker();
+  set_marker_fc();
   set_lsp();
 }
+
+function set_marker_fc() {
+  var myCenter=new google.maps.LatLng(42.432488, -58.088068);
+
+  var icon_f = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#f1c40f',
+    fillOpacity: .6,
+    strokeWeight: 0,
+      // scale: iconSize
+    };
+
+    var marker_f=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_f,
+      label: "F"
+    });
+
+    marker_f.addListener('click', function() {
+      add_lsp_f();
+    });
+
+    marker_f.addListener('dblclick', function() {
+      remove_lsp_f();
+    });
+
+    marker_f.setMap(map);
+
+    function add_lsp_f() {
+     lsp_f.setMap(map);
+   }
+
+   function remove_lsp_f() {
+     lsp_f.setMap(null);
+   }
+
+   var myCenter=new google.maps.LatLng(42.432488, -54.088068);
+
+   var icon_c = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#7f8c8d',
+    fillOpacity: .6,
+    strokeWeight: 0,
+      // scale: iconSize
+    };
+
+    var marker_c=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_c,
+      label: "C"
+    });
+
+    marker_c.addListener('click', function() {
+      remove_lsp_c();
+    });
+
+  // marker_c.addListener('dblclick', function() {
+  //     add_lsp_c();
+  // });
+
+  marker_c.setMap(map);
+
+  function add_lsp_c() {
+   lsp_c.setMap(map);
+ }
+
+ function remove_lsp_c() {
+   lsp_1.setMap(null);
+   lsp_2.setMap(null);
+   lsp_3.setMap(null);
+   lsp_4.setMap(null);
+   lsp_5.setMap(null);
+   lsp_6.setMap(null);
+   lsp_7.setMap(null);
+   lsp_8.setMap(null);
+ }
+}
+
 
 function set_marker() {
   var myCenter=new google.maps.LatLng(40.432488, -56.088068);
 
   var icon_1 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#f1c40f',
-      fillOpacity: .6,
-      strokeWeight: 0,
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#f1c40f',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_1=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_1,
-  label: "1"
-  });
+    var marker_1=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_1,
+      label: "1"
+    });
 
-  marker_1.addListener('click', function() {
+    marker_1.addListener('click', function() {
       add_lsp_1();
-  });
+    });
 
-  marker_1.addListener('dblclick', function() {
+    marker_1.addListener('dblclick', function() {
       remove_lsp_1();
-  });
+    });
 
-  marker_1.setMap(map);
+    marker_1.setMap(map);
 
-  function add_lsp_1() {
+    function add_lsp_1() {
      lsp_1.setMap(map);
-  }
+   }
 
-  function remove_lsp_1() {
+   function remove_lsp_1() {
      lsp_1.setMap(null);
-  }
+   }
 
 
-  var myCenter=new google.maps.LatLng(38.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(38.432488, -56.088068);
 
-  var icon_2 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#f39c12',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_2 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#f39c12',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_2=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_2,
-  label: "2"
-  });
+    var marker_2=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_2,
+      label: "2"
+    });
 
-  marker_2.addListener('click', function() {
+    marker_2.addListener('click', function() {
       add_lsp_2();
-  });
+    });
 
-  marker_2.addListener('dblclick', function() {
+    marker_2.addListener('dblclick', function() {
       remove_lsp_2();
-  });
+    });
 
-  marker_2.setMap(map);
+    marker_2.setMap(map);
 
-  function add_lsp_2() {
+    function add_lsp_2() {
      lsp_2.setMap(map);
-  }
+   }
 
-  function remove_lsp_2() {
+   function remove_lsp_2() {
      lsp_2.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(36.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(36.432488, -56.088068);
 
-  var icon_3 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#e67e22',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_3 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#e67e22',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_3=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_3,
-  label: "3"
-  });
+    var marker_3=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_3,
+      label: "3"
+    });
 
-  marker_3.addListener('click', function() {
+    marker_3.addListener('click', function() {
       add_lsp_3();
-  });
+    });
 
-  marker_3.addListener('dblclick', function() {
+    marker_3.addListener('dblclick', function() {
       remove_lsp_3();
-  });
+    });
 
-  marker_3.setMap(map);
+    marker_3.setMap(map);
 
-  function add_lsp_3() {
+    function add_lsp_3() {
      lsp_3.setMap(map);
-  }
+   }
 
-  function remove_lsp_3() {
+   function remove_lsp_3() {
      lsp_3.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(34.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(34.432488, -56.088068);
 
-  var icon_4 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#d35400',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_4 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#d35400',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_4=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_4,
-  label: "4"
-  });
+    var marker_4=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_4,
+      label: "4"
+    });
 
-  marker_4.addListener('click', function() {
+    marker_4.addListener('click', function() {
       add_lsp_4();
-  });
+    });
 
-  marker_4.addListener('dblclick', function() {
+    marker_4.addListener('dblclick', function() {
       remove_lsp_4();
-  });
+    });
 
-  marker_4.setMap(map);
+    marker_4.setMap(map);
 
-  function add_lsp_4() {
+    function add_lsp_4() {
      lsp_4.setMap(map);
-  }
+   }
 
-  function remove_lsp_4() {
+   function remove_lsp_4() {
      lsp_4.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(32.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(32.432488, -56.088068);
 
-  var icon_5 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#e74c3c',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_5 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#e74c3c',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_5=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_5,
-  label: "5"
-  });
+    var marker_5=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_5,
+      label: "5"
+    });
 
-  marker_5.addListener('click', function() {
+    marker_5.addListener('click', function() {
       add_lsp_5();
-  });
+    });
 
-  marker_5.addListener('dblclick', function() {
+    marker_5.addListener('dblclick', function() {
       remove_lsp_5();
-  });
+    });
 
-  marker_5.setMap(map);
+    marker_5.setMap(map);
 
-  function add_lsp_5() {
+    function add_lsp_5() {
      lsp_5.setMap(map);
-  }
+   }
 
-  function remove_lsp_5() {
+   function remove_lsp_5() {
      lsp_5.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(30.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(30.432488, -56.088068);
 
-  var icon_6 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#c0392b',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_6 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#c0392b',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_6=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_6,
-  label: "6"
-  });
+    var marker_6=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_6,
+      label: "6"
+    });
 
-  marker_6.addListener('click', function() {
+    marker_6.addListener('click', function() {
       add_lsp_6();
-  });
+    });
 
-  marker_6.addListener('dblclick', function() {
+    marker_6.addListener('dblclick', function() {
       remove_lsp_6();
-  });
+    });
 
-  marker_6.setMap(map);
+    marker_6.setMap(map);
 
-  function add_lsp_6() {
+    function add_lsp_6() {
      lsp_6.setMap(map);
-  }
+   }
 
-  function remove_lsp_6() {
+   function remove_lsp_6() {
      lsp_6.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(28.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(28.432488, -56.088068);
 
-  var icon_7 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#3498db',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_7 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#3498db',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_7=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_7,
-  label: "7"
-  });
+    var marker_7=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_7,
+      label: "7"
+    });
 
-  marker_7.addListener('click', function() {
+    marker_7.addListener('click', function() {
       add_lsp_7();
-  });
+    });
 
-  marker_7.addListener('dblclick', function() {
+    marker_7.addListener('dblclick', function() {
       remove_lsp_7();
-  });
+    });
 
-  marker_7.setMap(map);
+    marker_7.setMap(map);
 
-  function add_lsp_7() {
+    function add_lsp_7() {
      lsp_7.setMap(map);
-  }
+   }
 
-  function remove_lsp_7() {
+   function remove_lsp_7() {
      lsp_7.setMap(null);
-  }
+   }
 
-  var myCenter=new google.maps.LatLng(26.432488, -56.088068);
+   var myCenter=new google.maps.LatLng(26.432488, -56.088068);
 
-  var icon_8 = {
-      path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-      fillColor: '#2980b9',
-      fillOpacity: .6,
-      strokeWeight: 0,
+   var icon_8 = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: '#2980b9',
+    fillOpacity: .6,
+    strokeWeight: 0,
       // scale: iconSize
-  };
+    };
 
-  var marker_8=new google.maps.Marker({
-  position:myCenter,
-  icon: icon_8,
-  label: "8"
-  });
+    var marker_8=new google.maps.Marker({
+      position:myCenter,
+      icon: icon_8,
+      label: "8"
+    });
 
-  marker_8.addListener('click', function() {
+    marker_8.addListener('click', function() {
       add_lsp_8();
-  });
+    });
 
-  marker_8.addListener('dblclick', function() {
+    marker_8.addListener('dblclick', function() {
       remove_lsp_8();
-  });
+    });
 
-  marker_8.setMap(map);
+    marker_8.setMap(map);
 
-  function add_lsp_8() {
+    function add_lsp_8() {
      lsp_8.setMap(map);
-  }
+   }
 
-  function remove_lsp_8() {
+   function remove_lsp_8() {
      lsp_8.setMap(null);
-  }
-}
+   }
+ }
 
 
-function set_lsp() {
+ function set_lsp() {
   var lsp_weight = 10;
+  var arrow_weight = 7;
+  var arrow_icon = {
+    path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+    strokeWeight: arrow_weight
+  };
 
   lsp_1 = new google.maps.Polyline({
     geodesic: true,
     strokeColor: '#f1c40f',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_1.setMap(null);
@@ -309,7 +407,21 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#f39c12',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
+
   });
 
   lsp_2.setMap(null);
@@ -318,7 +430,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#e67e22',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_3.setMap(null);
@@ -327,7 +452,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#d35400',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_4.setMap(null);
@@ -336,7 +474,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#e74c3c',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_5.setMap(null);
@@ -345,7 +496,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#c0392b',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_6.setMap(null);
@@ -354,7 +518,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#3498db',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_7.setMap(null);
@@ -363,7 +540,20 @@ function set_lsp() {
     geodesic: true,
     strokeColor: '#2980b9',
     strokeOpacity: 1.0,
-    strokeWeight: lsp_weight
+    strokeWeight: lsp_weight,
+    icons: [{
+      icon: arrow_icon,
+      offset: '100%',
+    }, {
+      icon: arrow_icon,
+      offset: '75%',
+    }, {
+      icon: arrow_icon,
+      offset: '50%',
+    }, {
+      icon: arrow_icon,
+      offset: '25%',
+    }]
   });
 
   lsp_8.setMap(null);
