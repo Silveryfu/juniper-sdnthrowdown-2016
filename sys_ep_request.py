@@ -89,6 +89,13 @@ class Ep_request:
     def ep_get_node(self):
         return self.ep_read(self.ep_node)
 
+    def ep_get_lsp_list(self):
+        #return self.ep_read(self.ep_lsp)
+        p = self.ep_read(self.ep_lsp)
+        #pprint (p)
+        return p
+
+
 if __name__ == "__main__":
     er = Ep_request()
     er.ep_get_node_location('10.210.10.124')

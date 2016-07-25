@@ -11,7 +11,7 @@ The optimizer contains three major components:
   * sys_path_compute.py: methods to compute path.
 
 3. State Installation
-  * sys_path_update.py: methods to install path.
+  * sys_path_update.py: methods to install path; It also contains high-level methods for Topology Discovery
 
 + Other modules:
   * sys_constant.py: credentials, constants and mappings.
