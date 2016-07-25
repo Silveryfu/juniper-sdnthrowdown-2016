@@ -1,5 +1,7 @@
 import SimpleHTTPServer
 import SocketServer
+import sys
+sys.path.insert(0, "../")
 import sys_constant as sc
 
 PORT = sc.TOPO_SERVER_PORT
