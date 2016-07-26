@@ -60,7 +60,8 @@ class UI:
                 all_lsp_list[lsp_name] = True
 
         text = ""
-        print affect_lsp_list
+        #print affect_lsp_list
+
         for lsp in all_lsp_list:
             number = int(lsp[-1])
             start = lsp.split('_')[2]
@@ -74,6 +75,7 @@ class UI:
                     print ":", affect_lsp_list[lsp]
                 else:
                     print "no avaliable path found"
+                self.lu.set_lsp_by_node(lsp, affect_lsp_list[lsp]);
                 lsp_co = []
                 for node in affect_lsp_list[lsp]:
                     lsp_co.append(sc.node_co_map[sc.node_ip_map[node]])
