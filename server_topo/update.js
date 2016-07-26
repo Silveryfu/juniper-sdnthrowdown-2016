@@ -22,13 +22,14 @@ function update_map() {
 	  // console.log( jqxhr.status ); // 200
 	  // console.log( "Load was performed." );
 	});
-	update_link_bw();
+	// update_link_bw();
 	update_link_status();
 	update_lsp();
 }
 
 function update_link_bw() {
 	var delim = 20000000/1000000000;
+	console.log(link_1[link_1.length-1]);
 	link_1_bw.setOptions({strokeWeight: link_1[link_1.length - 1].bandwidth * delim});
 	link_2_bw.setOptions({strokeWeight: link_2[link_2.length - 1].bandwidth * delim});
 	link_3_bw.setOptions({strokeWeight: link_3[link_3.length - 1].bandwidth * delim});
