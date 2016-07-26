@@ -66,7 +66,7 @@ class Link_event_handler(threading.Thread):
             if lsp_name.split("_")[1] == "ONE":
                 all_lsp_list[lsp_name] = True
         if (event['status'] == "healed" or forged_status == "healed"):
-            affect_lsp_list = all_lsp_list
+            affect_lsp_list = {}
         else:
             text = ""
             for lsp in all_lsp_list:

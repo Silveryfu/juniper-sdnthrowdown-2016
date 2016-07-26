@@ -232,4 +232,6 @@ if __name__ == "__main__":
     #print Lu.get_lsp_by_name('GROUP_ONE_SF_NY_LSP4')
     #print Lu.get_lsps_by_node()
     #pprint(Lu.get_all_link())
-    pprint(Lu.get_lsps_by_node())
+    #pprint(Lu.get_lsps_by_node())
+    print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP1", ['dallas', 'houston', 'tampa'])
+    print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP1", ['chicago', 'dallas'])

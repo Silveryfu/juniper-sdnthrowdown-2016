@@ -16,6 +16,7 @@ class UI:
             "node_disjoint": self.node_disjoint,
             "link_disjoint": self.link_disjoint,
             "csp": self.constraint_shortest,
+            "set_lsp": self.set_lsp,
             "exit": self.exit,
         }
         self.pc = pc
@@ -26,7 +27,7 @@ class UI:
         print "SYS-V Console"
         while (self.running):
             cmd = raw_input(">> ")
-            '''
+            
             try:
                 func = self.functions[cmd.split(" ")[0]]
                 cmd_items = cmd.split(" '")[1:]
@@ -35,12 +36,13 @@ class UI:
                 func(cmd_items)
             except:
                 print "Input error!"
-			'''
+            '''
             func = self.functions[cmd.split(" ")[0]]
             cmd_items = cmd.split(" '")[1:]
             for i in range(0, len(cmd_items)):
                 cmd_items[i] = cmd_items[i].replace("'", "")
             func(cmd_items)
+            '''
     # cmd functions
     def exit(self, arg):
     # quit the console
@@ -78,7 +80,7 @@ class UI:
                 lsp_co_str = "lsp_" + bytes(number + offset) + "_path = " + json.dumps(lsp_co) + ";\n\n"
             else:
                 lsp_co_str = "lsp_" + bytes(number + offset) + "_path = " + json.dumps(lsp_co_list[lsp]) + ";\n\n"
-                print lsp_co_str
+                #print lsp_co_str
             text = text + lsp_co_str
         with open("server_topo/lsp.js", "w") as f:
             f.write(text)
@@ -155,6 +157,21 @@ class UI:
         affect_lsp_list[lsp_full] = self.pc.compute_constrained_shortest_path(constraint=bw, node1=node1, node2=node2)
         self.handle(affect_lsp_list)
 
+    def set_lsp(self, arg):
+    # set an LSP to a certain path
+    # lsp: name of an LSP
+    # path: list of name of nodes along the lsp
+        if len(arg) != 2:
+            print "Wrong number of argument (takes 2, %d given)"%len(arg)
+            return
+        lsp_name, path_name = arg[0], arg[1]
+        path = path_name.split(',')
+        node_list = []
+        for node in path:
+            node_list.append(node)
+        affect_lsp_list = {}
+        affect_lsp_list[lsp_name] = node_list
+        self.handle(affect_lsp_list)
 
 if __name__ == "__main__":
     ui = UI()
