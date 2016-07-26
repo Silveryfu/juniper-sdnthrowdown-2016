@@ -92,7 +92,10 @@ class Lsp_update:
         for link in link_list:
             node_1 = sc.ip_node_map[link["endA"]["node"]["name"]]
             node_2 = sc.ip_node_map[link["endZ"]["node"]["name"]]
-            result_list.append((node_1, node_2))
+            if int(link["endA"]["node"]["name"].split('.')[-1]) < int(link["endZ"]["node"]["name"].split('.')[-1]):
+                result_list.append((node_1, node_2))
+            else:
+                result_list.append((node_2, node_1))
         return result_list
 
     def get_link_status(self, link):
@@ -144,7 +147,7 @@ class Lsp_update:
         for lsp in self.er.ep_get_lsp_list():
             lsp_name = lsp['name']
             try:
-                ero = lsp['plannedProperties']['ero']
+                ero = lsp['liveProperties']['ero']
             except KeyError:
                 continue
 
@@ -157,15 +160,23 @@ class Lsp_update:
                     pass
         return link_lsp_dict
 
-    def dump_lsp_path(self):
-        path_list = []
+    def dump_lsp_path(self, lspName = None):
+        path_list = {}
+        #with open ("debug.txt", "w") as f:
+        #    f.write(json.dumps(self.er.ep_get_lsp_list(), indent = 4))
         for lsp in self.er.ep_get_lsp_list():
             lsp_name = lsp['name']
             if sc.GROUP_ID not in lsp_name:
                 continue
+            if lspName != None and lsp_name != lspName:
+                continue
             path = []
+            if lsp['name'].split("_")[2] == "SF":
+                path.append(sc.node_ip_map['san francisco'])
+            elif lsp['name'].split("_")[2] == "NY":
+                path.append(sc.node_ip_map['new york'])
             try:
-                ero = lsp['plannedProperties']['ero']
+                ero = lsp['liveProperties']['ero']
             except KeyError:
                 continue
 
@@ -177,25 +188,37 @@ class Lsp_update:
                 except socket.error:
                     path.append(sc.node_ip_map[address])
                     pass
-            path_list.append(path)
+            # MANUALLY check if the end point of an lSP path is the REAL end point (some how the REST API doesn't do it consistantly on this!)
+            if lsp['name'].split("_")[3] == "NY" and sc.ip_node_map[path[-1]] != 'new york':
+                path.append(sc.node_ip_map['new york'])
+            elif lsp['name'].split("_")[3] == "SF" and sc.ip_node_map[path[-1]] != 'san francisco':
+                path.append(sc.node_ip_map['san francisco'])            
+            path_list[lsp_name] = path
         return path_list
-    def get_lsps_by_node(self, lsps=None):
-        if lsps == None:
-            lsps = self.dump_lsp_path()
-        lsp_list = []
+
+    def get_lsps_by_node(self):
+        lsps = self.dump_lsp_path()
+        lsp_list = {}
         for lsp in lsps:
             lsp_co = []
-            for node in lsp:
+            for node in lsps[lsp]:
                 lsp_co.append(sc.node_co_map[node])
-            lsp_list.append(lsp_co)
+            lsp_list[lsp] = lsp_co
         return lsp_list
-	    
+
+    def get_lsp_by_name(self, lspName):
+        path_list = self.dump_lsp_path(lspName = lspName)[0]
+        name_list = []
+        for ip in path_list:
+	        name_list.append(sc.ip_node_map[ip])
+        return name_list
 			
 if __name__ == "__main__":
     Lu = Lsp_update()
     # print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP1", ['miami', 'tampa', 'houston', 'dallas', 'los angeles'])
-    #print Lu.dump_lsp_path()
+    #print Lu.dump_lsp_path('GROUP-SEVEN_SF_NY_LSP4')
     # Lu.get_link_lsp_map()
+    #print Lu.get_lsp_name_list()
     #print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP1", ['dallas', 'miami'])
     #pprint(Lu.get_all_links())
     #print Lu.set_lsp_by_node("GROUP_ONE_SF_NY_LSP4", ['dallas', 'miami'])
@@ -205,5 +228,8 @@ if __name__ == "__main__":
     #print Lu.set_lsp_by_node("GROUP_ONE_NY_SF_LSP4", [ 'miami', 'dallas', 'los angeles'])
     #print Lu.get_all_links()
     #print Lu.get_link_status(("10.210.15.1", "10.210.15.2"))
-    pprint (Lu.get_lsp_name_list())
-    pprint (Lu.get_lsps_by_node())
+    #pprint (Lu.get_lsp_name_list())
+    #print Lu.get_lsp_by_name('GROUP_ONE_SF_NY_LSP4')
+    #print Lu.get_lsps_by_node()
+    #pprint(Lu.get_all_link())
+    pprint(Lu.get_lsps_by_node())

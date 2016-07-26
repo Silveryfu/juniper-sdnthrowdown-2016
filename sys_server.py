@@ -35,7 +35,7 @@ class Demo_Mgr(threading.Thread):
         lsp_co_list = self.lu.get_lsps_by_node()
         with open("server_topo/lsp.js", "w") as f:
             for lsp_co in lsp_co_list:
-                lsp_co_str = "lsp_" + bytes(self.lsp_ind + 1) + "_path = " + json.dumps(lsp_co) + ";\n\n"
+                lsp_co_str = "lsp_" + bytes(self.lsp_ind%8 + 1) + "_path = " + json.dumps(lsp_co_list[lsp_co]) + ";\n\n"
                 f.write(lsp_co_str)
                 self.lsp_ind = (self.lsp_ind + 1)%8
 

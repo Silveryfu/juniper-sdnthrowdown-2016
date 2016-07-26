@@ -93,12 +93,17 @@ class Ep_request:
         #return self.ep_read(self.ep_lsp)
         p = self.ep_read(self.ep_lsp)
         #pprint (p)
+        '''
+        with open("debug.txt","w") as f:
+            f.write(json.dumps(p,indent = 4))
+        '''
         return p
 
 
 if __name__ == "__main__":
     er = Ep_request()
-    er.ep_get_node_location('10.210.10.124')
+    #er.ep_get_node_location('10.210.10.124')
+    print er.ep_get_lsp_list()
 
 
 

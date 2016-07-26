@@ -14,9 +14,11 @@ class Path_compute:
         self.lu = lu
         self.er = er
 
+    def get__adjacent_list(self, forged = None, status = None):
+        self.adj_dict, self.edge_dict = self._adjacent_list(forged_link = forged, status = status)
+
     def compute(self, start='san francisco', end='new york'):
-        adj_dict, edge_dict = self._adjacent_list()
-        return self.dijkstra(adj_dict, edge_dict, start, end)
+        return self.dijkstra(self.adj_dict, self.edge_dict, start, end)
 
 
     def compute_node_disjoint_path(self, node1, node2):
@@ -55,28 +57,38 @@ class Path_compute:
         
         return path_one, path_two
 
-    def compute_constrained_shortest_path(self, constraint=0.0, node1='san francisco',node2='new york'):
+    def compute_constrained_shortest_path(self, constraint_type='bw', constraint=0.0, node1='san francisco',node2='new york'):
         edge_dict = {}
         adj_dict = defaultdict(list)
         for link in self.lu.get_all_link():
-            if self.cd.get_link_rtt(link[0], link[1]) > constraint:
-                edge_dict[link] = self.cd.get_if_bw(link[0], link[1])
-                adj_dict[link[0]].append(link[1])
-                adj_dict[link[1]].append(link[0])
+            value = -1
+            if constraint_type == 'bw':
+                value = 1000000000 - 1000 * self.cd.get_link_bw(link[0], link[1])
+            elif constraint_type == 'rtt':
+                value = self.cd.get_link_rtt(link[0], link[1])
+            else:
+                value = 1000000000 - 1000 * self.cd.get_link_bw(link[0], link[1])
+            if value > constraint:
+                edge_dict[link] = self.cd.get_link_bw(link[0], link[1])
             else:
                 edge_dict[link] = sys.maxint 
-                adj_dict[link[0]].append(link[1])
-                adj_dict[link[1]].append(link[0])
+            adj_dict[link[0]].append(link[1])
+            adj_dict[link[1]].append(link[0])
 
         path = self.dijkstra(adj_dict, edge_dict, node1,node2)
+
         for index in range(len(path)):
+            ip_1 = sc.node_ip_map[path[index]]
+            ip_2 = sc.node_ip_map[path[index+1]]
+
+            if int(ip_1.split('.')[-1]) > int(ip_2.split('.')[-1]):
+                path[index], path[index+1] = path[index + 1], path[index]
+
             if edge_dict[(path[index],path[index+1])] >= sys.maxint:
-                return None
+                return []
             else:
                 return path
                 
-                
-
     def dijkstra(self, adj, edge_dict, start='san francisco', end='new york'):
         # Compute and generate an updated ERO marked by node names
         # return: path, list
@@ -111,24 +123,43 @@ class Path_compute:
                             cost_add = edge_dict[(neighbor, n1)]
                         heapq.heappush(q, (cost + cost_add, neighbor, path))
 
-    def _adjacent_list(self):
+    def _adjacent_list(self, forged_link = None, status = None):
+        ''''
         edge_dict = {}
         adj_dict = defaultdict(list)
         for link in self.lu.get_all_link():
+            if link == forged_link and status == "down":
+                continue
             if self._check_link_status(link):
-                edge_dict[link] = self.cd.get_link_rtt(link[0], link[1])
+                edge_dict[link] = self.cd.get_link_rtt(link[0], link[1]) #***slow
                 adj_dict[link[0]].append(link[1])
                 adj_dict[link[1]].append(link[0])
+        return adj_dict, edge_dict
+        '''
+        edge_dict = {}
+        adj_dict = defaultdict(list)
+        link_list = self.lu.get_all_link()
+        if forged_link in link_list and status == "down":
+            link_list.remove(forged_link)
+        # generate adj_dict
+        for link in link_list:
+            adj_dict[link[0]].append(link[1])
+            adj_dict[link[1]].append(link[0])
+
+        # generate edge_dict
+        rtt_list = self.cd.get_links_rtt(link_list)
+        for link in rtt_list:
+            edge_dict[link] = rtt_list[link]
         return adj_dict, edge_dict
 
     def _check_link_status(self, link):
             endA_IP = sc.node_ip_map[link[0]]
             endZ_IP = sc.node_ip_map[link[1]]
-            if self.lu.get_link_status((endA_IP, endZ_IP)) == "Up":
-                return True
-            else:
-                return False
-
+            return True
+            # if self.lu.get_link_status((endA_IP, endZ_IP)) == "Up":  #***slow
+            #     return True
+            # else:
+            #     return False
 
     def link_node_map(self):
         link_node_map = sc.link_node_map
@@ -140,10 +171,6 @@ class Path_compute:
             
         #print sc.if_link_map
 
-    
-        
-        
-
 if __name__ == "__main__":
     pc = Path_compute()
     #adj_dict,edge_dict = pc.adjacent_list()
@@ -153,7 +180,9 @@ if __name__ == "__main__":
     #print pc.compute('san francisco','new york')
     #print pc.compute_constrained_shortest_path(constraint=2, node1='san francisco',node2='new york')
     #print pc.compute_constrained_shortest_path(constraint=5, node1='san francisco',node2='new york')
-    pc.link_node_map()
+    # pc.link_node_map()
+    adj, edge = pc._adjacent_list(forged_link = ('san francisco', 'chicago'), status = "down")
+    pprint(edge)
 
 
 
