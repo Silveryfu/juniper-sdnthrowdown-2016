@@ -48,6 +48,7 @@ class Controller_db:
             ip_1, ip_2 = ip_2, ip_1
 
         link = sc.node_link_map[(ip_1, ip_2)]
+
         start_if = link.split('_')[0].lstrip('L')
 
         node1 = sc.ip_node_map[sc.if_node_map[start_if]]

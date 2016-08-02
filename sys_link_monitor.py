@@ -35,7 +35,10 @@ class Link_monitor (threading.Thread):
             for link in link_list:
                 endA_IP = sc.node_ip_map[link[0]]
                 endZ_IP = sc.node_ip_map[link[1]]
-                bandwidth = self.cd.get_link_bw(link[0], link[1])
+                try:
+                    bandwidth = self.cd.get_link_bw(link[0], link[1])
+                except:
+                    continue
                 link_json = [sc.node_co_map[endA_IP], sc.node_co_map[endZ_IP], {"status": self.lu.get_link_status((endA_IP, endZ_IP)), "bandwidth":bandwidth}]
                 link_str = "link_" + bytes(ind) + " = " + json.dumps(link_json, indent = 4) + ";\n\n"
                 ind += 1

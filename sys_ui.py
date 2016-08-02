@@ -7,6 +7,7 @@ from sys_ep_request import Ep_request
 from sys_path_compute import Path_compute
 from sys_link_event_handler import Link_event_handler
 from pprint import pprint
+import traceback
 
 class UI:
     def __init__(self, pc=Path_compute(), lu=Lsp_update(), leh = Link_event_handler()):
@@ -35,6 +36,7 @@ class UI:
                     cmd_items[i] = cmd_items[i].replace("'", "")
                 func(cmd_items)
             except:
+                traceback.print_exc()
                 print "Input error!"
             '''
             func = self.functions[cmd.split(" ")[0]]

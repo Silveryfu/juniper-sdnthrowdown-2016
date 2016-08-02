@@ -90,8 +90,11 @@ class Lsp_update:
         link_list = self.er.ep_get_topo()['links']
         result_list = []
         for link in link_list:
-            node_1 = sc.ip_node_map[link["endA"]["node"]["name"]]
-            node_2 = sc.ip_node_map[link["endZ"]["node"]["name"]]
+            try:
+                node_1 = sc.ip_node_map[link["endA"]["node"]["name"]]
+                node_2 = sc.ip_node_map[link["endZ"]["node"]["name"]]
+            except:
+                pass
             if int(link["endA"]["node"]["name"].split('.')[-1]) < int(link["endZ"]["node"]["name"].split('.')[-1]):
                 result_list.append((node_1, node_2))
             else:

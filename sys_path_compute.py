@@ -95,8 +95,10 @@ class Path_compute:
         node_list = []
 
         for node in self.er.ep_get_node():
-            node_list.append(sc.ip_node_map[node['name'].encode('ascii')])
-
+            try:
+                node_list.append(sc.ip_node_map[node['name'].encode('ascii')])
+            except:
+                continue
         adj_dict=adj
         edge_dict = edge_dict
 
@@ -117,11 +119,14 @@ class Path_compute:
                 path = (path, n1)
                 for neighbor in adj_dict[n1]:
                     if neighbor not in visited:
-                        if (n1, neighbor) in edge_dict:
-                            cost_add = edge_dict[(n1, neighbor)]
-                        else:
-                            cost_add = edge_dict[(neighbor, n1)]
-                        heapq.heappush(q, (cost + cost_add, neighbor, path))
+                        try:
+                            if (n1, neighbor) in edge_dict:
+                                cost_add = edge_dict[(n1, neighbor)]
+                            else:
+                                cost_add = edge_dict[(neighbor, n1)]
+                            heapq.heappush(q, (cost + cost_add, neighbor, path))
+                        except:
+                            continue
 
     def _adjacent_list(self, forged_link = None, status = None):
         ''''
