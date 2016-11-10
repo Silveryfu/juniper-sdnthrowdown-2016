@@ -1,7 +1,7 @@
-SYS SDN Path Optimizer
+SYS-V
 ==
 
-The optimizer contains three major components:
+SYS-V is an SD-WAN optimizer on [Juniper NorthStar SDN controller](http://www.juniper.net/us/en/products-services/sdn/northstar-network-controller/). It contains three major components:
 
 1. Topology Discovery
   * sys_ep_request.py: methods to launch API requests with the controller.
